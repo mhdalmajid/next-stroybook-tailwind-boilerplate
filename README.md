@@ -10,25 +10,46 @@ npm run dev
 yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## Note
+There is an issue with Storybook and Tailwind v2.0 compatibility that gives this error:
+To solve this we need to upgrade our Storybook packages with the following command:
+```bash
+npx sb upgrade --prerelease
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
-## Learn More
+## todo:
+- pick test libraries cypress - jest - https://testing-library.com/ - ??
+- stylelintrc
+-
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+app
+The app directory is where our application actually lives. I like the approach of having the application files, which are not dedicated to the framework bundled in a specific directory.
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+app/api
+This folder contains all code we need to access the APIs of our application. Personally, I like to have one folder for each REST API controller. Each folder then contains the functions for the API calls as well as the tests.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+app/api/RestClient.ts
+The RestClient contains basic functions like get, post, delete, and so on. Those functions are then used by the APIs. I like to use axios for this one.
+
+
+api/components
+The components directory contains all your elements, modules, templates, and layouts. I will explain each of these under a separate title. Some of you may prefer the Atomic Design by Brad Frost which is fine as well. In my opinion, the Atomic Design Pattern is sometimes a little bit confusing whether a component is a molecule or organism.
+
+
+api/components/elements
+This directory contains all the basic building blocks for your app. For example a button or a headline component.
+
+
+api/components/layouts
+Create all your components here which are more than a basic building block. This could be a header or a footer component. Most likely those modules are built out of multiple
+
+
+api/components/pages or templates
+In the templates directory, you should place all your page templates which are then called from your Next.js specific pages. You can find an example of this pattern in the Repository.
